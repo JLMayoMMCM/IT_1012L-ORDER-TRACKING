@@ -1,6 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -40,10 +39,6 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
     private JLabel nameID, nameClient, nameDesc, namePrice, namePrio;
     private JTextField textID, textClient, textDesc, textPrice;
     private JComboBox<String> textPrio;
-
-    // FONT LIST
-    final private Font headerFont = new Font("Segoe UI Semibold", Font.BOLD, 20);
-    final private Font subFont = new Font("Segoe UI", Font.PLAIN, 14);
 
     private JPanel orderPanel, current_datePanel, pick_up_panel, orderButtonPanel, statusButtonPanel, filterPanel, listPanel;
 
@@ -291,6 +286,7 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
         textDesc.setText("");
         textPrice.setText("");
 
+        add_order.setEnabled(true);
         status_order.setEnabled(false);
         complete_order.setEnabled(false);
         delete_order.setEnabled(false);
@@ -385,17 +381,24 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(add_order)) {
+            if (textClient.getText().isEmpty() || textDesc.getText().isEmpty() || textPrice.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please fill all fields", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             getData();
             order_model.addRow(rows);
-            getData();
+            process_data();
             resetData();
         } else if (e.getSource().equals(update_order)) {
+            if (textClient.getText().isEmpty() || textDesc.getText().isEmpty() || textPrice.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please fill all fields", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             int f = order_list.getSelectedRow();
             getData();
             for (int col = 0; col < order_list.getColumnCount(); col++) {
                 order_list.setValueAt(rows.get(col), f, col);
             }
-            resetData();
         } else if (e.getSource().equals(clear_order)) {
             resetData();
         } else if (e.getSource().equals(status_order)) {
