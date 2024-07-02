@@ -1,3 +1,19 @@
+/**
+ * The Main_Program class represents the main program of the Order Tracking System.
+ * It provides functionality for managing orders, including adding, updating, deleting, and completing orders.
+ * The program uses a graphical user interface (GUI) built with Swing components.
+ * 
+ * The class extends the UI_Config class and implements the ActionListener, KeyListener, and MouseListener interfaces.
+ * It contains various instance variables for storing and manipulating order data, as well as GUI components.
+ * 
+ * The program initializes the GUI components, sets up event listeners, and loads order data from a file.
+ * It also provides methods for generating random order IDs, displaying order information, and managing order dates.
+ * 
+ * To use the program, simply run the Main_Program class.
+ * The GUI will be displayed, allowing you to interact with the order management system.
+ * 
+ * Note: This code is just a selection and may not compile or run on its own.
+ */
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -42,7 +58,9 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
 
     private JPanel orderPanel, current_datePanel, pick_up_panel, orderButtonPanel, statusButtonPanel, filterPanel, listPanel;
 
-    // PROGRAM CODE
+    /**
+     * Constructor for the Main_Program class.
+     */
     public Main_Program() {
         startup();
 
@@ -65,15 +83,9 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
         add(listTable()).setBounds(360, 20, 1180, 500);
         add(frame()).setBounds(20, 20, 1920, 1080);
 
-
-
-        
         textID.setText(randomID());
 
         resetData();
-
-
-        
 
         // BUTTON LISTENERS
         add_order.addActionListener(this);
@@ -119,7 +131,6 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
         ImageIcon imageIcon = new ImageIcon(((ImageIcon) logo.getIcon()).getImage().getScaledInstance(340, 225, Image.SCALE_DEFAULT));
         logo.setIcon(imageIcon);
         add(logo).setBounds(1550, 100, 340, 225);
-
     }
 
     // RANDOM ID NUMBERS
@@ -152,6 +163,7 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
         orderPanel.add(textPrio);
     }
 
+    // DISPLAYS CURRENT DATE
     public void current_date() {
         current_datePanel = new JPanel();
         current_datePanel.setLayout(new GridLayout(1, 3, 4, 2));
@@ -161,6 +173,7 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
         current_datePanel.add(current_date);
     }
 
+    // CREATES A 3 COMBO BOX LAYOUT FOR DISPLAY DATE
     public void pick_up_date() {
         pick_up_panel = new JPanel();
         pick_up_panel.setLayout(new GridLayout(1, 5, 4, 2));
@@ -186,6 +199,7 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
         }
     }
 
+    // CREATES A PANEL FOR ORDER MANIPULATION
     public void orderButton() {
         orderButtonPanel = new JPanel();
         orderButtonPanel.setLayout(new GridLayout(1, 3, 4, 2));
@@ -200,6 +214,7 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
         orderButtonPanel.add(clear_order);
     }
 
+    // CREATES A SECONDARY PANEL FOR DATA MANIPULATION
     public void statusButton() {
         statusButtonPanel = new JPanel();
         statusButtonPanel.setLayout(new GridLayout(1, 3, 4, 2));
@@ -220,6 +235,7 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
         delete_order.setEnabled(false);
     }
 
+    // CREATES A PANEL FOR FILTERING ORDERS
     public JPanel filterSearch() {
         filterPanel = new JPanel();
         filterSearch = new JLabel("Search: ");
@@ -234,6 +250,7 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
         return filterPanel;
     }
 
+    // CREATES A PANEL FOR FRAME BORDER
     public JPanel frame() {
         JPanel frame = new JPanel();
         frame.setLayout(new BorderLayout());
@@ -242,6 +259,7 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
         return frame;
     }
 
+    // CREATES A PANEL FOR DISPLAYING DATA ON A TABLE
     public JPanel listTable() {
         listPanel = new JPanel();
         order_list = new JTable();
@@ -264,6 +282,7 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
         return listPanel;
     }
 
+    // RETRIEVES DATA
     public void getData() {
         rows = new Vector<>();
         rows.add(textID.getText());
@@ -276,10 +295,12 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
         rows.add(year_delivery.getSelectedItem().toString());
     }
 
+    // START OF PROGRAM
     public static void main(String[] args) {
         new Main_Program();
     }
 
+    // RESETS BUTTON AND DATA VALUES
     public void resetData() {
         textID.setText(randomID());
         textClient.setText("");
@@ -292,6 +313,7 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
         delete_order.setEnabled(false);
     }
 
+    // ENABLES AND DISABLES BUTTONS
     public void order_click() {
         add_order.setEnabled(false);
         update_order.setEnabled(true);
@@ -300,6 +322,7 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
         complete_order.setEnabled(true);
     }
 
+    // PROCESS DATA INPUT
     public void process_data() {
         String data = "";
         for (int i = 0; i < order_model.getRowCount(); i++) {
@@ -311,6 +334,7 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
         st.storeToFile(data);
     }
 
+    //
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().equals(order_list)) {
@@ -374,7 +398,7 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
 
             order_sort = new TableRowSorter<>(order_model);
             order_list.setRowSorter(order_sort);
-            order_sort.setRowFilter(RowFilter.regexFilter(filter, 0, 1));
+            order_sort.setRowFilter(RowFilter.regexFilter(filter, 1));
         }
     }
 
@@ -421,4 +445,3 @@ public class Main_Program extends UI_Config implements ActionListener, KeyListen
         }
     }
 }
-

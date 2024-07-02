@@ -1,5 +1,13 @@
-import java.awt.Color;
+/**
+ * The UI_Config class represents a custom JFrame with various methods to configure its properties.
+ * It inherits from the JFrame class, extending its functionality.
+ * The class provides methods to set the frame resolution, frame title, visibility, close operation, and resizability.
+ * It also provides a method to set a background image for the frame.
+ * The class demonstrates object-oriented programming concepts such as inheritance, encapsulation, polymorphism, and abstraction.
+ */
+
 import javax.swing.*;
+
 
 public class UI_Config extends JFrame {
     private int H, W;
@@ -27,11 +35,6 @@ public class UI_Config extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
-    // SETS BACKGROUND COLOR OF THE FRAME
-    public void setDisplayBG(int red, int green, int blue, int opacity) {
-        getContentPane().setBackground(new Color(red, green, blue, opacity));
     }
 
     // SETS FRAME TITLE AND RESOLUTION
