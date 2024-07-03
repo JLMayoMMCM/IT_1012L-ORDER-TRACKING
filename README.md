@@ -1,11 +1,13 @@
 ## Getting Started
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
-
+Welcome to IT101-2L Final Project Presentation. This contains the project files for submission including the manuscript, presentation, and program.
 ## Folder Structure
 
-The workspace contains two folders by default, where:
+The workspace contains four folders, where:
 
+- `DOCUMENTS`: the folder containing documentation.
+- `MANUSCRIPT`: the folder containing the word and pdf file for the project manuscript.
+- `LOGO`: the folder containing the client's logo.
 - `src`: the folder to maintain sources
 - `lib`: the folder to maintain dependencies
 
